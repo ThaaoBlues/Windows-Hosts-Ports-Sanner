@@ -1,0 +1,12 @@
+C:\Users\unknown\source\repos\Port Scanner\Port Scanner\bin\Debug\Port Scanner.exe.config
+C:\Users\unknown\source\repos\Port Scanner\Port Scanner\bin\Debug\Port Scanner.exe
+C:\Users\unknown\source\repos\Port Scanner\Port Scanner\bin\Debug\Port Scanner.pdb
+C:\Users\unknown\source\repos\Port Scanner\Port Scanner\bin\Debug\Port Scanner.xml
+C:\Users\unknown\source\repos\Port Scanner\Port Scanner\obj\Debug\Port Scanner.vbprojAssemblyReference.cache
+C:\Users\unknown\source\repos\Port Scanner\Port Scanner\obj\Debug\Port_Scanner.Form1.resources
+C:\Users\unknown\source\repos\Port Scanner\Port Scanner\obj\Debug\Port_Scanner.Resources.resources
+C:\Users\unknown\source\repos\Port Scanner\Port Scanner\obj\Debug\Port Scanner.vbproj.GenerateResource.cache
+C:\Users\unknown\source\repos\Port Scanner\Port Scanner\obj\Debug\Port Scanner.vbproj.CoreCompileInputs.cache
+C:\Users\unknown\source\repos\Port Scanner\Port Scanner\obj\Debug\Port Scanner.exe
+C:\Users\unknown\source\repos\Port Scanner\Port Scanner\obj\Debug\Port Scanner.xml
+C:\Users\unknown\source\repos\Port Scanner\Port Scanner\obj\Debug\Port Scanner.pdb
