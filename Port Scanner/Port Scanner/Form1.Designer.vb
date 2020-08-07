@@ -36,6 +36,14 @@ Partial Class Form1
         Me.BackgroundWorker2 = New System.ComponentModel.BackgroundWorker()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.Button4 = New System.Windows.Forms.Button()
+        Me.Button5 = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'clock_hosts
@@ -78,9 +86,9 @@ Partial Class Form1
         '
         Me.Button2.Location = New System.Drawing.Point(14, 401)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(223, 37)
+        Me.Button2.Size = New System.Drawing.Size(124, 26)
         Me.Button2.TabIndex = 5
-        Me.Button2.Text = "Hosts discovery"
+        Me.Button2.Text = "Hosts discovery(ping)"
         Me.Button2.UseVisualStyleBackColor = True
         '
         'ProgressBar2
@@ -107,7 +115,7 @@ Partial Class Form1
         Me.CheckedListBox2.FormattingEnabled = True
         Me.CheckedListBox2.Location = New System.Drawing.Point(243, 60)
         Me.CheckedListBox2.Name = "CheckedListBox2"
-        Me.CheckedListBox2.Size = New System.Drawing.Size(183, 334)
+        Me.CheckedListBox2.Size = New System.Drawing.Size(183, 94)
         Me.CheckedListBox2.TabIndex = 8
         '
         'BackgroundWorker2
@@ -130,11 +138,87 @@ Partial Class Form1
         Me.Label2.TabIndex = 10
         Me.Label2.Text = "Port range :"
         '
+        'Button3
+        '
+        Me.Button3.Location = New System.Drawing.Point(14, 370)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(146, 25)
+        Me.Button3.TabIndex = 11
+        Me.Button3.Text = "Hosts discovery(ARP table)"
+        Me.Button3.UseVisualStyleBackColor = True
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(306, 168)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(61, 13)
+        Me.Label3.TabIndex = 12
+        Me.Label3.Text = "IP to MAC :"
+        '
+        'TextBox2
+        '
+        Me.TextBox2.Location = New System.Drawing.Point(283, 193)
+        Me.TextBox2.Name = "TextBox2"
+        Me.TextBox2.Size = New System.Drawing.Size(143, 20)
+        Me.TextBox2.TabIndex = 13
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(241, 196)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(23, 13)
+        Me.Label4.TabIndex = 14
+        Me.Label4.Text = "IP :"
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(238, 225)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(36, 13)
+        Me.Label5.TabIndex = 15
+        Me.Label5.Text = "MAC :"
+        '
+        'TextBox3
+        '
+        Me.TextBox3.Location = New System.Drawing.Point(283, 222)
+        Me.TextBox3.Name = "TextBox3"
+        Me.TextBox3.Size = New System.Drawing.Size(143, 20)
+        Me.TextBox3.TabIndex = 16
+        '
+        'Button4
+        '
+        Me.Button4.Location = New System.Drawing.Point(283, 248)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(143, 21)
+        Me.Button4.TabIndex = 17
+        Me.Button4.Text = "Get MAC"
+        Me.Button4.UseVisualStyleBackColor = True
+        '
+        'Button5
+        '
+        Me.Button5.Location = New System.Drawing.Point(144, 401)
+        Me.Button5.Name = "Button5"
+        Me.Button5.Size = New System.Drawing.Size(104, 26)
+        Me.Button5.TabIndex = 18
+        Me.Button5.Text = "Copy selected IP"
+        Me.Button5.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.Controls.Add(Me.Button5)
+        Me.Controls.Add(Me.Button4)
+        Me.Controls.Add(Me.TextBox3)
+        Me.Controls.Add(Me.Label5)
+        Me.Controls.Add(Me.Label4)
+        Me.Controls.Add(Me.TextBox2)
+        Me.Controls.Add(Me.Label3)
+        Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.CheckedListBox2)
@@ -165,4 +249,12 @@ Partial Class Form1
     Friend WithEvents BackgroundWorker2 As System.ComponentModel.BackgroundWorker
     Friend WithEvents TextBox1 As TextBox
     Friend WithEvents Label2 As Label
+    Friend WithEvents Button3 As Button
+    Friend WithEvents Label3 As Label
+    Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents Label4 As Label
+    Friend WithEvents Label5 As Label
+    Friend WithEvents TextBox3 As TextBox
+    Friend WithEvents Button4 As Button
+    Friend WithEvents Button5 As Button
 End Class

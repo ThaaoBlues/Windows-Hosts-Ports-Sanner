@@ -1,7 +1,10 @@
-﻿Public Class Form1
+﻿Imports System.IO
+
+Public Class Form1
     Dim host As String
     Dim port As Integer
     Dim counter As Integer
+
     Private Sub scan_hosts(ByVal ip As String)
 
         Dim strIPAddress As String
@@ -37,10 +40,6 @@
 
     End Sub
 
-
-    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs)
-
-    End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Dim root = New TreeNode("Hosts")
@@ -153,4 +152,66 @@
         Next
     End Sub
 
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        Dim ip = TextBox2.Text
+        Dim mac = GetMAC(ip)
+        TextBox3.Text = mac
+    End Sub
+
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        Dim IP As String = CheckedListBox1.CheckedItems(0)
+        My.Computer.Clipboard.Clear()
+        My.Computer.Clipboard.SetText(IP)
+    End Sub
+
+    Declare Function SendARP Lib "iphlpapi.dll" (
+      ByVal DestIP As UInt32, ByVal SrcIP As UInt32,
+      ByVal pMacAddr As Byte(), ByRef PhyAddrLen As Integer) As Integer
+
+    Public Shared Function GetMAC(ByVal IPaddress As String) As String
+        Dim addr As System.Net.IPAddress = System.Net.IPAddress.Parse(IPaddress)
+        Dim mac() As Byte = New Byte(6) {}
+        Dim len As Integer = mac.Length
+        SendARP(CType(addr.Address, UInt32), 0, mac, len)
+        Dim macAddress As String = BitConverter.ToString(mac, 0, len)
+        Return macAddress
+    End Function
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        CheckedListBox1.Items.Clear()
+
+        Dim strIPAddress As String
+
+        strIPAddress = Me.CheckedListBox2.CheckedItems(0)
+
+        Dim split As String() = strIPAddress.Split(".")
+        Dim base As String = strIPAddress
+        base = base.Replace(split(split.Length - 1), "")
+
+        My.Computer.FileSystem.WriteAllText(Directory.GetCurrentDirectory() + "/arp.bat", "arp -a", False, System.Text.Encoding.ASCII)
+
+        Dim oProcess As New Process()
+        Dim oStartInfo As New ProcessStartInfo("arp.exe", "-a")
+        oStartInfo.UseShellExecute = False
+        oStartInfo.RedirectStandardOutput = True
+        oProcess.StartInfo = oStartInfo
+        oProcess.Start()
+        oProcess.WaitForExit()
+
+        Dim sOutput As String
+        Using oStreamReader As System.IO.StreamReader = oProcess.StandardOutput
+            sOutput = oStreamReader.ReadToEnd()
+        End Using
+        For Each line In sOutput.Split(vbNewLine)
+
+            If line.Contains(base) Then
+                For Each sep In line.Split(" "c)
+                    If sep.Contains(base) Then
+                        CheckedListBox1.Items.Add(sep)
+                    End If
+                Next
+            End If
+        Next
+        My.Computer.FileSystem.DeleteFile(Directory.GetCurrentDirectory() + "/arp.bat")
+    End Sub
 End Class
