@@ -42,6 +42,14 @@ Public Class Form1
 
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Dim strIPAddress As String
+
+        Try
+            strIPAddress = Me.CheckedListBox2.CheckedItems(0)
+        Catch ex As Exception
+            MsgBox("Please Select an IP to scan")
+            Return
+        End Try
         Dim root = New TreeNode("Hosts")
         TreeView1.Nodes.Add(root)
         For Each host As String In Me.CheckedListBox1.CheckedItems
@@ -54,6 +62,14 @@ Public Class Form1
 
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        Dim strIPAddress As String
+
+        Try
+            strIPAddress = Me.CheckedListBox2.CheckedItems(0)
+        Catch ex As Exception
+            MsgBox("Please Select a base IP")
+            Return
+        End Try
         BackgroundWorker2.RunWorkerAsync()
     End Sub
 
@@ -153,13 +169,25 @@ Public Class Form1
     End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-        Dim ip = TextBox2.Text
-        Dim mac = GetMAC(ip)
-        TextBox3.Text = mac
+        If TextBox2.Text <> "" And TextBox3.Text = "" Then
+            Dim ip = TextBox2.Text
+            Dim mac = GetMAC(ip)
+            TextBox3.Text = mac
+        Else
+            MsgBox("Please fill the IP case and let the MAC case blank")
+            Return
+        End If
     End Sub
 
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
-        Dim IP As String = CheckedListBox1.CheckedItems(0)
+        Dim IP As String
+
+        Try
+            IP = Me.CheckedListBox2.CheckedItems(0)
+        Catch ex As Exception
+            MsgBox("Please Select an IP to copy")
+            Return
+        End Try
         My.Computer.Clipboard.Clear()
         My.Computer.Clipboard.SetText(IP)
     End Sub
@@ -169,11 +197,12 @@ Public Class Form1
       ByVal pMacAddr As Byte(), ByRef PhyAddrLen As Integer) As Integer
 
     Public Shared Function GetMAC(ByVal IPaddress As String) As String
+
         Dim addr As System.Net.IPAddress = System.Net.IPAddress.Parse(IPaddress)
-        Dim mac() As Byte = New Byte(6) {}
-        Dim len As Integer = mac.Length
-        SendARP(CType(addr.Address, UInt32), 0, mac, len)
-        Dim macAddress As String = BitConverter.ToString(mac, 0, len)
+            Dim mac() As Byte = New Byte(6) {}
+            Dim len As Integer = mac.Length
+            SendARP(CType(addr.Address, UInt32), 0, mac, len)
+            Dim macAddress As String = BitConverter.ToString(mac, 0, len)
         Return macAddress
     End Function
 
@@ -182,13 +211,18 @@ Public Class Form1
 
         Dim strIPAddress As String
 
-        strIPAddress = Me.CheckedListBox2.CheckedItems(0)
+        Try
+            strIPAddress = Me.CheckedListBox2.CheckedItems(0)
+        Catch ex As Exception
+            MsgBox("Please Select a base IP")
+            Return
+        End Try
+
+
 
         Dim split As String() = strIPAddress.Split(".")
         Dim base As String = strIPAddress
         base = base.Replace(split(split.Length - 1), "")
-
-        My.Computer.FileSystem.WriteAllText(Directory.GetCurrentDirectory() + "/arp.bat", "arp -a", False, System.Text.Encoding.ASCII)
 
         Dim oProcess As New Process()
         Dim oStartInfo As New ProcessStartInfo("arp.exe", "-a")
@@ -212,6 +246,17 @@ Public Class Form1
                 Next
             End If
         Next
-        My.Computer.FileSystem.DeleteFile(Directory.GetCurrentDirectory() + "/arp.bat")
+    End Sub
+
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+        If TextBox4.Text <> "" And TextBox5.Text = "" Then
+            TextBox5.Text = System.Net.Dns.GetHostEntry(TextBox4.Text).HostName.ToString()
+        ElseIf TextBox4.Text = "" And TextBox5.Text <> "" Then
+            For Each IPs In System.Net.Dns.GetHostEntry(TextBox5.Text).AddressList()
+                TextBox4.Text = TextBox4.Text + IPs.ToString + vbNewLine
+            Next
+        Else
+            MsgBox("Please fill only one case")
+        End If
     End Sub
 End Class
