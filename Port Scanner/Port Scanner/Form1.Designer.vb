@@ -50,6 +50,11 @@ Partial Class Form1
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Button6 = New System.Windows.Forms.Button()
         Me.TextBox4 = New System.Windows.Forms.TextBox()
+        Me.Button7 = New System.Windows.Forms.Button()
+        Me.TextBox6 = New System.Windows.Forms.TextBox()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.Button8 = New System.Windows.Forms.Button()
+        Me.Button9 = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'clock_hosts
@@ -83,7 +88,7 @@ Partial Class Form1
         '
         Me.Button1.Location = New System.Drawing.Point(432, 401)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(356, 37)
+        Me.Button1.Size = New System.Drawing.Size(180, 21)
         Me.Button1.TabIndex = 4
         Me.Button1.Text = "Start scan"
         Me.Button1.UseVisualStyleBackColor = True
@@ -129,7 +134,7 @@ Partial Class Form1
         '
         'TextBox1
         '
-        Me.TextBox1.Location = New System.Drawing.Point(688, 5)
+        Me.TextBox1.Location = New System.Drawing.Point(686, 5)
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.Size = New System.Drawing.Size(100, 20)
         Me.TextBox1.TabIndex = 9
@@ -138,7 +143,7 @@ Partial Class Form1
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(620, 8)
+        Me.Label2.Location = New System.Drawing.Point(618, 8)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(62, 13)
         Me.Label2.TabIndex = 10
@@ -156,7 +161,7 @@ Partial Class Form1
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(306, 168)
+        Me.Label3.Location = New System.Drawing.Point(315, 167)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(61, 13)
         Me.Label3.TabIndex = 12
@@ -164,7 +169,7 @@ Partial Class Form1
         '
         'TextBox2
         '
-        Me.TextBox2.Location = New System.Drawing.Point(283, 193)
+        Me.TextBox2.Location = New System.Drawing.Point(277, 193)
         Me.TextBox2.Name = "TextBox2"
         Me.TextBox2.Size = New System.Drawing.Size(143, 20)
         Me.TextBox2.TabIndex = 13
@@ -189,14 +194,14 @@ Partial Class Form1
         '
         'TextBox3
         '
-        Me.TextBox3.Location = New System.Drawing.Point(283, 222)
+        Me.TextBox3.Location = New System.Drawing.Point(277, 222)
         Me.TextBox3.Name = "TextBox3"
         Me.TextBox3.Size = New System.Drawing.Size(143, 20)
         Me.TextBox3.TabIndex = 16
         '
         'Button4
         '
-        Me.Button4.Location = New System.Drawing.Point(283, 248)
+        Me.Button4.Location = New System.Drawing.Point(277, 248)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(143, 21)
         Me.Button4.TabIndex = 17
@@ -215,7 +220,7 @@ Partial Class Form1
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(261, 272)
+        Me.Label6.Location = New System.Drawing.Point(267, 272)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(153, 13)
         Me.Label6.TabIndex = 19
@@ -263,11 +268,59 @@ Partial Class Form1
         Me.TextBox4.Size = New System.Drawing.Size(143, 71)
         Me.TextBox4.TabIndex = 25
         '
+        'Button7
+        '
+        Me.Button7.Location = New System.Drawing.Point(618, 401)
+        Me.Button7.Name = "Button7"
+        Me.Button7.Size = New System.Drawing.Size(170, 21)
+        Me.Button7.TabIndex = 26
+        Me.Button7.Text = "Save scan"
+        Me.Button7.UseVisualStyleBackColor = True
+        '
+        'TextBox6
+        '
+        Me.TextBox6.Location = New System.Drawing.Point(512, 5)
+        Me.TextBox6.Name = "TextBox6"
+        Me.TextBox6.Size = New System.Drawing.Size(100, 20)
+        Me.TextBox6.TabIndex = 27
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(429, 8)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(79, 13)
+        Me.Label9.TabIndex = 28
+        Me.Label9.Text = "Scanning port :"
+        '
+        'Button8
+        '
+        Me.Button8.Location = New System.Drawing.Point(432, 424)
+        Me.Button8.Name = "Button8"
+        Me.Button8.Size = New System.Drawing.Size(180, 21)
+        Me.Button8.TabIndex = 29
+        Me.Button8.Text = "Stop scan"
+        Me.Button8.UseVisualStyleBackColor = True
+        '
+        'Button9
+        '
+        Me.Button9.Location = New System.Drawing.Point(618, 424)
+        Me.Button9.Name = "Button9"
+        Me.Button9.Size = New System.Drawing.Size(170, 21)
+        Me.Button9.TabIndex = 30
+        Me.Button9.Text = "Pause scan"
+        Me.Button9.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.ClientSize = New System.Drawing.Size(805, 453)
+        Me.Controls.Add(Me.Button9)
+        Me.Controls.Add(Me.Button8)
+        Me.Controls.Add(Me.Label9)
+        Me.Controls.Add(Me.TextBox6)
+        Me.Controls.Add(Me.Button7)
         Me.Controls.Add(Me.TextBox4)
         Me.Controls.Add(Me.Button6)
         Me.Controls.Add(Me.Label8)
@@ -326,4 +379,9 @@ Partial Class Form1
     Friend WithEvents Label8 As Label
     Friend WithEvents Button6 As Button
     Friend WithEvents TextBox4 As TextBox
+    Friend WithEvents Button7 As Button
+    Friend WithEvents TextBox6 As TextBox
+    Friend WithEvents Label9 As Label
+    Friend WithEvents Button8 As Button
+    Friend WithEvents Button9 As Button
 End Class

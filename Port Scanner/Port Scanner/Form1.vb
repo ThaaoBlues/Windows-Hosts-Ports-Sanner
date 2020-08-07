@@ -125,6 +125,7 @@ Public Class Form1
                 Me.Invoke(Sub()
                               'safe to access the form or controls in here
                               ProgressBar1.Value = i
+                              TextBox6.Text = i
                           End Sub)
 
                 port = i
@@ -258,5 +259,44 @@ Public Class Form1
         Else
             MsgBox("Please fill only one case")
         End If
+    End Sub
+
+    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
+        If Me.TreeView1.Nodes.Count = 0 Then
+            MsgBox("There is no scan result to save yet.")
+            Return
+        End If
+        Dim thisDate As String
+        thisDate = Today
+        thisDate = thisDate.ToString.Replace("/", "_")
+        MsgBox(Directory.GetCurrentDirectory() + "/" + thisDate + "_scan.txt")
+        For Each tn In TreeView1.Nodes
+            listnodes(tn)
+        Next
+    End Sub
+    Private Sub listnodes(view As TreeNode)
+        Dim indexer As System.IO.StreamWriter
+        Dim thisDate As String
+        thisDate = Today
+        thisDate = thisDate.ToString.Replace("/", "_")
+        indexer = My.Computer.FileSystem.OpenTextFileWriter(Directory.GetCurrentDirectory() + "/" + thisDate + "_scan.txt", True)
+        For Each tn In view.Nodes
+            indexer.WriteLine(tn)
+            indexer.Close()
+            listnodes(tn)
+        Next
+    End Sub
+
+    Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
+        MsgBox("Feature not available yet")
+    End Sub
+
+    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
+        If BackgroundWorker1.IsBusy Then
+            BackgroundWorker1.CancelAsync()
+        Else
+            MsgBox("No scan are running")
+        End If
+
     End Sub
 End Class
