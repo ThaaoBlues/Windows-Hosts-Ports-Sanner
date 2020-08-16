@@ -55,6 +55,9 @@ Partial Class Form1
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Button8 = New System.Windows.Forms.Button()
         Me.Button9 = New System.Windows.Forms.Button()
+        Me.TextBox7 = New System.Windows.Forms.TextBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
         'clock_hosts
@@ -81,7 +84,7 @@ Partial Class Form1
         '
         Me.TreeView1.Location = New System.Drawing.Point(432, 60)
         Me.TreeView1.Name = "TreeView1"
-        Me.TreeView1.Size = New System.Drawing.Size(356, 335)
+        Me.TreeView1.Size = New System.Drawing.Size(356, 304)
         Me.TreeView1.TabIndex = 3
         '
         'Button1
@@ -111,6 +114,7 @@ Partial Class Form1
         '
         'BackgroundWorker1
         '
+        Me.BackgroundWorker1.WorkerSupportsCancellation = True
         '
         'Label1
         '
@@ -299,7 +303,7 @@ Partial Class Form1
         Me.Button8.Name = "Button8"
         Me.Button8.Size = New System.Drawing.Size(180, 21)
         Me.Button8.TabIndex = 29
-        Me.Button8.Text = "Stop scan"
+        Me.Button8.Text = "Cancel scan"
         Me.Button8.UseVisualStyleBackColor = True
         '
         'Button9
@@ -311,11 +315,40 @@ Partial Class Form1
         Me.Button9.Text = "Pause scan"
         Me.Button9.UseVisualStyleBackColor = True
         '
+        'TextBox7
+        '
+        Me.TextBox7.Location = New System.Drawing.Point(537, 371)
+        Me.TextBox7.Name = "TextBox7"
+        Me.TextBox7.Size = New System.Drawing.Size(143, 20)
+        Me.TextBox7.TabIndex = 31
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(429, 374)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(104, 13)
+        Me.Label10.TabIndex = 32
+        Me.Label10.Text = "Select a specific IP :"
+        '
+        'CheckBox1
+        '
+        Me.CheckBox1.AutoSize = True
+        Me.CheckBox1.Location = New System.Drawing.Point(686, 375)
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.Size = New System.Drawing.Size(124, 17)
+        Me.CheckBox1.TabIndex = 33
+        Me.CheckBox1.Text = "Use the specified IP."
+        Me.CheckBox1.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(805, 453)
+        Me.ClientSize = New System.Drawing.Size(811, 453)
+        Me.Controls.Add(Me.CheckBox1)
+        Me.Controls.Add(Me.Label10)
+        Me.Controls.Add(Me.TextBox7)
         Me.Controls.Add(Me.Button9)
         Me.Controls.Add(Me.Button8)
         Me.Controls.Add(Me.Label9)
@@ -384,4 +417,7 @@ Partial Class Form1
     Friend WithEvents Label9 As Label
     Friend WithEvents Button8 As Button
     Friend WithEvents Button9 As Button
+    Friend WithEvents TextBox7 As TextBox
+    Friend WithEvents Label10 As Label
+    Friend WithEvents CheckBox1 As CheckBox
 End Class

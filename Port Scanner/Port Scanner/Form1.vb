@@ -42,20 +42,38 @@ Public Class Form1
 
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Dim strIPAddress As String
+        If CheckBox1.Checked Then
+            Dim strIPAddress As String
 
-        Try
-            strIPAddress = Me.CheckedListBox2.CheckedItems(0)
-        Catch ex As Exception
-            MsgBox("Please Select an IP to scan")
-            Return
-        End Try
-        Dim root = New TreeNode("Hosts")
-        TreeView1.Nodes.Add(root)
-        For Each host As String In Me.CheckedListBox1.CheckedItems
-            TreeView1.Nodes(0).Nodes.Add(New TreeNode(host))
-        Next
-        BackgroundWorker1.RunWorkerAsync()
+            Try
+                strIPAddress = TextBox7.Text
+            Catch ex As Exception
+                MsgBox("Please Select an IP to scan")
+                Return
+            End Try
+            Dim root = New TreeNode("Hosts")
+            TreeView1.Nodes.Add(root)
+
+            TreeView1.Nodes(0).Nodes.Add(New TreeNode(strIPAddress))
+
+            BackgroundWorker1.RunWorkerAsync()
+        Else
+            Dim strIPAddress As String
+
+            Try
+                strIPAddress = Me.CheckedListBox2.CheckedItems(0)
+            Catch ex As Exception
+                MsgBox("Please Select an IP to scan")
+                Return
+            End Try
+            Dim root = New TreeNode("Hosts")
+            TreeView1.Nodes.Add(root)
+            For Each host As String In Me.CheckedListBox1.CheckedItems
+                TreeView1.Nodes(0).Nodes.Add(New TreeNode(host))
+            Next
+            BackgroundWorker1.RunWorkerAsync()
+        End If
+
 
     End Sub
 
@@ -74,13 +92,108 @@ Public Class Form1
     End Sub
 
     Private Sub BackgroundWorker1_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles BackgroundWorker1.DoWork
-        Dim node As Integer = 0
-        Dim max As Integer = TextBox1.Text
 
-        If Me.CheckedListBox1.CheckedItems.Count() <> 1 Then
 
-            For Each host As String In Me.CheckedListBox1.CheckedItems
 
+        If CheckBox1.Checked Then
+            Dim node As Integer = 0
+            Dim max As Integer = TextBox1.Text
+
+            If TextBox7.Text <> "" Then
+
+                Dim host = TextBox7.Text
+
+                Me.Invoke(Sub()
+                              'safe to access the form or controls in here
+                              Me.ProgressBar1.Maximum = max
+                          End Sub)
+                Dim hostadd As System.Net.IPAddress
+                Try
+
+                    hostadd = System.Net.Dns.GetHostEntry(host).AddressList(0)
+                Catch ex As Exception
+                    MsgBox("Invalid IP address")
+                    Return
+                End Try
+
+
+                For i = 0 To max
+                    Me.Invoke(Sub()
+                                  'safe to access the form or controls in here
+                                  ProgressBar1.Value = i
+                                  TextBox6.Text = i
+                              End Sub)
+
+                    port = i
+
+
+                    Dim EPhost As New System.Net.IPEndPoint(hostadd, port)
+
+
+                    Dim s As New System.Net.Sockets.Socket(System.Net.Sockets.AddressFamily.InterNetwork,
+                                                           System.Net.Sockets.SocketType.Stream,
+                                                           System.Net.Sockets.ProtocolType.Tcp)
+                    Try
+                        s.Connect(EPhost)
+                    Catch
+                    End Try
+                    If s.Connected Then
+                        Me.Invoke(Sub()
+                                      'safe to access the form or controls in here
+                                      Me.TreeView1.Nodes(0).Nodes(node).Nodes.Add(i)
+                                  End Sub)
+
+                    End If
+
+                Next
+            Else
+                MsgBox("Please Select a base IP")
+            End If
+
+        Else
+            Dim node As Integer = 0
+            Dim max As Integer = TextBox1.Text
+
+            If Me.CheckedListBox1.CheckedItems.Count() <> 1 Then
+
+                For Each host As String In Me.CheckedListBox1.CheckedItems
+
+                    Me.Invoke(Sub()
+                                  'safe to access the form or controls in here
+                                  Me.ProgressBar1.Maximum = max
+                              End Sub)
+
+                    For i = 0 To max
+                        Me.Invoke(Sub()
+                                      'safe to access the form or controls in here
+                                      ProgressBar1.Value = i
+                                      TextBox6.Text = i
+                                  End Sub)
+
+                        port = i
+                        Dim hostadd As System.Net.IPAddress =
+                    System.Net.Dns.GetHostEntry(host).AddressList(0)
+                        Dim EPhost As New System.Net.IPEndPoint(hostadd, port)
+                        Dim s As New System.Net.Sockets.Socket(System.Net.Sockets.AddressFamily.InterNetwork,
+                                                           System.Net.Sockets.SocketType.Stream,
+                                                           System.Net.Sockets.ProtocolType.Tcp)
+                        Try
+                            s.Connect(EPhost)
+                        Catch
+                        End Try
+                        If s.Connected Then
+                            Me.Invoke(Sub()
+                                          'safe to access the form or controls in here
+                                          Me.TreeView1.Nodes(0).Nodes(node).Nodes.Add(i)
+                                      End Sub)
+
+                        End If
+
+                    Next
+                    node = node + 1
+                Next
+            Else
+                host = Me.CheckedListBox1.CheckedItems(0)
                 Me.Invoke(Sub()
                               'safe to access the form or controls in here
                               Me.ProgressBar1.Maximum = max
@@ -90,6 +203,7 @@ Public Class Form1
                     Me.Invoke(Sub()
                                   'safe to access the form or controls in here
                                   ProgressBar1.Value = i
+                                  TextBox6.Text = i
                               End Sub)
 
                     port = i
@@ -112,43 +226,12 @@ Public Class Form1
                     End If
 
                 Next
-                node = node + 1
-            Next
-        Else
-            host = Me.CheckedListBox1.CheckedItems(0)
-            Me.Invoke(Sub()
-                          'safe to access the form or controls in here
-                          Me.ProgressBar1.Maximum = max
-                      End Sub)
-
-            For i = 0 To max
-                Me.Invoke(Sub()
-                              'safe to access the form or controls in here
-                              ProgressBar1.Value = i
-                              TextBox6.Text = i
-                          End Sub)
-
-                port = i
-                Dim hostadd As System.Net.IPAddress =
-            System.Net.Dns.GetHostEntry(host).AddressList(0)
-                Dim EPhost As New System.Net.IPEndPoint(hostadd, port)
-                Dim s As New System.Net.Sockets.Socket(System.Net.Sockets.AddressFamily.InterNetwork,
-                                                   System.Net.Sockets.SocketType.Stream,
-                                                   System.Net.Sockets.ProtocolType.Tcp)
-                Try
-                    s.Connect(EPhost)
-                Catch
-                End Try
-                If s.Connected Then
-                    Me.Invoke(Sub()
-                                  'safe to access the form or controls in here
-                                  Me.TreeView1.Nodes(0).Nodes(node).Nodes.Add(i)
-                              End Sub)
-
-                End If
-
-            Next
+            End If
         End If
+
+
+
+
 
 
 
@@ -294,9 +377,11 @@ Public Class Form1
     Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
         If BackgroundWorker1.IsBusy Then
             BackgroundWorker1.CancelAsync()
+            MsgBox("Scan has been cancelled")
         Else
             MsgBox("No scan are running")
         End If
 
     End Sub
+
 End Class
